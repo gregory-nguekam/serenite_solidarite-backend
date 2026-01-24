@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/serenite
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate   # ou update pour aller vite en démo
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  jwt:
+    secret: "CHANGE_ME_TO_A_LONG_RANDOM_SECRET_32+CHARS"
+    expiration-minutes: 120
+  cors:
+    allowed-origins: "http://localhost:5173"
