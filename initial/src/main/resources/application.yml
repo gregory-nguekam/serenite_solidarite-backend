@@ -3,12 +3,13 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/serenite
+    url: jdbc:postgresql://localhost:5432/serenite_solidarite
     username: postgres
-    password: postgres
+    password: admin
   jpa:
     hibernate:
-      ddl-auto: validate   # ou update pour aller vite en démo
+      ddl-auto: update 
+      show-sql: true 
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -19,3 +20,4 @@ app:
     expiration-minutes: 120
   cors:
     allowed-origins: "http://localhost:5173"
+

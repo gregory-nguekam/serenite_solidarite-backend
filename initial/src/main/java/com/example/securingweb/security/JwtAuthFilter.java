@@ -1,4 +1,4 @@
-package com.example.securingweb;
+package com.example.securingweb.security;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.example.securingweb.AdherentUserDetailsService;
 
 import java.io.IOException;
 

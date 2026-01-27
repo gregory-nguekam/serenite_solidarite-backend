@@ -1,5 +1,6 @@
 package com.example.securingweb.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,5 +17,9 @@ public class RegisterAdherentRequest {
     @Email @NotBlank
     public String email;
 
-    public String telephone;
+    @NotBlank public String telephone;
+
+    @Valid @NotNull public AdresseDto adresse;
+
+    
 }

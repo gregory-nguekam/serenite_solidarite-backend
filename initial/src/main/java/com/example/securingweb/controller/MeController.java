@@ -1,6 +1,6 @@
-package com.example.securingweb.api;
+package com.example.securingweb.controller;
 
-import com.example.securingweb.repo.AdherentRepository;
+import com.example.securingweb.repository.AdherentRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +18,7 @@ public class MeController {
     public Object me(Authentication authentication) {
         String email = authentication.getName();
         var a = adherentRepository.findByEmail(email).orElseThrow();
+        var membreNom = a.getMembres().stream().findFirst().map(m -> m.getNom()).orElse(null);
 
         return new Object() {
             public final String adherentId = a.getId().toString();
@@ -25,8 +26,7 @@ public class MeController {
             public final String prenom = a.getPrenom();
             public final String email = a.getEmail();
             public final String role = a.getRole().name();
-            public final String membreNom = a.getMembre().getNom();
-            public final String membreType = a.getMembre().getTypeMembre().name();
+            //public final String membreNom = a.getMembres();
         };
     }
 }

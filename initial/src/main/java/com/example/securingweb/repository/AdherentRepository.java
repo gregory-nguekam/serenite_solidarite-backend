@@ -1,6 +1,6 @@
-package com.example.securingweb.repo;
+package com.example.securingweb.repository;
 
-import com.example.securingweb.domain.AdherentEntity;
+import com.example.securingweb.model.AdherentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;
