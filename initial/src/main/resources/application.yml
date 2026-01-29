@@ -1,5 +1,7 @@
 server:
   port: 8080
+  tomcat:
+    max-part-count: 20
 
 spring:
   datasource:
@@ -13,6 +15,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 
 app:
   jwt:

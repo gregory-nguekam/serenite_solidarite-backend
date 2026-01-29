@@ -3,7 +3,6 @@ package com.example.securingweb.controller;
 import com.example.securingweb.dto.AuthResponse;
 import com.example.securingweb.dto.LoginRequest;
 import com.example.securingweb.dto.LoginResponse;
-import com.example.securingweb.dto.RegisterAdherentRequest;
 import com.example.securingweb.repository.AdherentRepository;
 import com.example.securingweb.security.JwtService;
 import com.example.securingweb.service.AdherentService;

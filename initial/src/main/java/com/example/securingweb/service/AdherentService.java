@@ -44,41 +44,41 @@ public class AdherentService {
     }
 
     @Transactional
-    public String registerAdherent(RegisterAdherentRequest req, MultipartFile identite, MultipartFile rib,
-            MultipartFile justificatifDomicile) {
-        if (adherentRepository.findByEmail(req.email).isPresent()) {
+    public String registerAdherent(RegisterAdherentRequest req) {
+        if (adherentRepository.findByEmail(req.getEmail()).isPresent()) {
             throw new IllegalArgumentException("EMAIL_ALREADY_USED : Email existe deja");
         }
 
         var adherent = new AdherentEntity();
-        adherent.setNom(req.nom);
-        adherent.setPrenom(req.prenom);
-        adherent.setEmail(req.email);
-        adherent.setTelephone(req.telephone);
+        adherent.setNom(req.getNom());
+        adherent.setPrenom(req.getPrenom());
+        adherent.setEmail(req.getEmail());
+        adherent.setTelephone(req.getTelephone());
         adherent.setPassword(passwordEncoder.encode("toto"));
         adherent.setRole(AppRole.ADHERENT);
         adherent.setIsActive(true);
 
-        if (req.membreId != null) {
-            membreRepository.findById(req.membreId).ifPresent(m -> adherent.getMembres().add(m));
+        if (req.getMembreId() != null) {
+            membreRepository.findById(req.getMembreId()).ifPresent(m -> adherent.getMembres().add(m));
         } else {
             membreRepository.findByEmail("contact@direct.com").ifPresent(m -> adherent.getMembres().add(m));
         }
 
         adherentRepository.save(adherent);
 
+        var adresseDto = req.getAdresse();
         var adresse = new AdresseEntity();
-        adresse.setNumeroRue(req.adresse.numeroRue);
-        adresse.setRue(req.adresse.rue);
-        adresse.setCodePostal(req.adresse.codePostal);
-        adresse.setVille(req.adresse.ville);
-        adresse.setComplement(req.adresse.complement);
+        adresse.setNumeroRue(adresseDto.getNumeroRue());
+        adresse.setRue(adresseDto.getRue());
+        adresse.setCodePostal(adresseDto.getCodePostal());
+        adresse.setVille(adresseDto.getVille());
+        adresse.setComplement(adresseDto.getComplement());
         adresse.setAdherent(adherent);
         adresseRepository.save(adresse);
 
-        saveDocument(adherent, identite, DocumentType.IDENTITE);
-        saveDocument(adherent, rib, DocumentType.RIB);
-        saveDocument(adherent, justificatifDomicile, DocumentType.JUSTIFICATIF_DOMICILE);
+        saveDocument(adherent, req.getIdentite(), DocumentType.IDENTITE);
+        saveDocument(adherent, req.getRib(), DocumentType.RIB);
+        saveDocument(adherent, req.getJustificatifDomicile(), DocumentType.JUSTIFICATIF_DOMICILE);
 
         return jwtService.generateToken(adherent.getEmail(), adherent.getRole().name());
     }

@@ -14,7 +14,7 @@ public class DocumentEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 500)
     private String nom;
 
     @Column(nullable = false, length = 50)
