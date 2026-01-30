@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/serenite_solidarite
+    url: jdbc:postgresql://db:5432/serenite_solidarite
     username: postgres
     password: admin
   jpa:

@@ -44,3 +44,14 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+// Source - https://stackoverflow.com/a/21721305
+// Posted by JB Nizet, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-01-30, License - CC BY-SA 4.0
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.example.securingweb.SecuringWebApplication'
+	}
+}
+
