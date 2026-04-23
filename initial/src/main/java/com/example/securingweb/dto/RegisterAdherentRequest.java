@@ -12,15 +12,23 @@ public class RegisterAdherentRequest {
 
     private UUID membreId;
 
-    @NotBlank private String nom;
-    @NotBlank private String prenom;
+    @NotBlank
+    private String nom;
+    @NotBlank
+    private String prenom;
 
-    @Email @NotBlank
+    @Email
+    @NotBlank
     private String email;
 
-    @NotBlank private String telephone;
+    @NotBlank
+    private String password;
 
-    @Valid @NotNull
+    @NotBlank
+    private String telephone;
+
+    @Valid
+    @NotNull
     private AdresseDto adresse;
 
     @NotNull
@@ -102,5 +110,13 @@ public class RegisterAdherentRequest {
 
     public void setJustificatifDomicile(MultipartFile justificatifDomicile) {
         this.justificatifDomicile = justificatifDomicile;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

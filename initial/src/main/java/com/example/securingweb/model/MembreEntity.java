@@ -1,5 +1,6 @@
 package com.example.securingweb.model;
 
+import com.example.securingweb.model.enums.MembreType;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -20,11 +21,15 @@ public class MembreEntity {
     @Column(nullable = false, length = 50)
     private String initiales;
 
-    @Column(nullable = false, length = 50)
-    private String email;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private MembreType type = MembreType.DIRECT;
 
     @Column(nullable = false, length = 20)
     private String telephone;
+
+    @Column(nullable = false, length = 20)
+    private String email;
 
     @Column(name = "centre_interet", length = 100)
     private String centreInteret;
@@ -68,6 +73,14 @@ public class MembreEntity {
 
     public void setInitiales(String initiales) {
         this.initiales = initiales;
+    }
+
+    public MembreType getType() {
+        return type;
+    }
+
+    public void setType(MembreType type) {
+        this.type = type;
     }
 
     public String getEmail() {

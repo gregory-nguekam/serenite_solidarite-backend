@@ -1,12 +1,11 @@
 package com.example.securingweb.bootstrap;
 
 import com.example.securingweb.model.AdherentEntity;
-import com.example.securingweb.model.AdresseEntity;
-import com.example.securingweb.model.AppRole;
+import com.example.securingweb.model.enums.AppRole;
 import com.example.securingweb.model.MembreEntity;
+import com.example.securingweb.model.enums.MembreType;
 import com.example.securingweb.repository.AdherentRepository;
 import com.example.securingweb.repository.MembreRepository;
-import com.example.securingweb.repository.AdresseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,6 +44,7 @@ public class SeedData {
             var membre = new MembreEntity();
             membre.setNom("Direct");
             membre.setInitiales("DIRECT");
+            membre.setType(MembreType.DIRECT);
             membre.setEmail("contact@direct.com");
             membre.setTelephone("0600000000");
             membre.setCentreInteret("Solidarité");
@@ -71,6 +71,7 @@ public class SeedData {
             a.setPassword(encoder.encode("toto"));
             a.setRole(AppRole.ADHERENT);
             a.setIsActive(true);
+            a.setIsValidated(false);
             a.getMembres().add(membre);
             var adresse2 = new AdresseEntity();
             adresse2.setNumeroRue("30");

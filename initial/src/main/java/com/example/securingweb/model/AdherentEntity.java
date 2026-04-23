@@ -1,27 +1,23 @@
 package com.example.securingweb.model;
 
+import com.example.securingweb.model.enums.AppRole;
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "adherent")
-public class AdherentEntity {
+public class AdherentEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "appartenir",
-            joinColumns = @JoinColumn(name = "id_adherent"),
-            inverseJoinColumns = @JoinColumn(name = "id_membre")
-    )
-    private Set<MembreEntity> membres = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "membre_id", nullable = false)
+    private MembreEntity membre;
 
     @Column(nullable = false, length = 50)
     private String nom;
@@ -45,6 +41,17 @@ public class AdherentEntity {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
+    @Column(name = "is_validated", nullable = false)
+    private Boolean isValidated = false;
+
+    public AdherentEntity(LocalDateTime createdAt, LocalDateTime updatedAt) {
+        super(createdAt, updatedAt);
+    }
+
+    public AdherentEntity(){
+
+    }
+
     // getters/setters
     public UUID getId() {
         return id;
@@ -52,14 +59,6 @@ public class AdherentEntity {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public Set<MembreEntity> getMembres() {
-        return membres;
-    }
-
-    public void setMembres(Set<MembreEntity> membres) {
-        this.membres = membres;
     }
 
     public String getNom() {
@@ -116,5 +115,13 @@ public class AdherentEntity {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Boolean getIsValidated() {
+        return isValidated;
+    }
+
+    public void setIsValidated(Boolean isValidated) {
+        this.isValidated = isValidated;
     }
 }

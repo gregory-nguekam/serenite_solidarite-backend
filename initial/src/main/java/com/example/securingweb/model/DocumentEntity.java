@@ -1,10 +1,9 @@
 package com.example.securingweb.model;
 
+import com.example.securingweb.model.enums.DocumentType;
 import jakarta.persistence.*;
 
 import java.util.UUID;
-
-import javax.print.Doc;
 
 @Entity
 @Table(name = "document")
@@ -25,9 +24,11 @@ public class DocumentEntity {
     @Column(nullable = false)
     private byte[] fichier;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_adherent", nullable = false)
-    private AdherentEntity adherent;
+    @Column(nullable = false)
+    private UUID entiteId;
+
+    @Column(nullable = false)
+    private boolean isAdherent;
 
     public UUID getId() {
         return id;
@@ -61,11 +62,19 @@ public class DocumentEntity {
         this.fichier = fichier;
     }
 
-    public AdherentEntity getAdherent() {
-        return adherent;
+    public boolean isAdherent() {
+        return isAdherent;
     }
 
-    public void setAdherent(AdherentEntity adherent) {
-        this.adherent = adherent;
+    public void setAdherent(boolean adherent) {
+        isAdherent = adherent;
+    }
+
+    public UUID getEntiteId() {
+        return entiteId;
+    }
+
+    public void setEntiteId(UUID entiteId) {
+        this.entiteId = entiteId;
     }
 }

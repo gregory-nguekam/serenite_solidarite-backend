@@ -8,6 +8,17 @@ spring:
     url: jdbc:postgresql://${PGHOST}${PGPORT}${PGDATABASE}
     username: ${PGUSER}
     password: ${PGPASSWORD}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   jpa:
     hibernate:
       ddl-auto: update 
@@ -26,4 +37,6 @@ app:
     expiration-minutes: 120
   cors:
     allowed-origins: "https://solidarite-serenite.vercel.app/"
+  mail:
+    from: ${MAIL_FROM:${spring.mail.username}}
 

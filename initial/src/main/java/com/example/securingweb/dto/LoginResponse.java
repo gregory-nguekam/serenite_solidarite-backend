@@ -9,24 +9,4 @@ public class LoginResponse {
     public LoginResponse(String token) {
         this.token = token;
     }
-
-    public static class RegisterRequest {
-
-        // Adhérent
-        @NotBlank
-        public String nom;
-        @NotBlank public String prenom;
-        @Email
-        @NotBlank public String email;
-        @NotBlank public String password;
-
-        // Membre (association/groupe/famille/unité)
-        // valeurs attendues: ASSOCIATION, GROUPE, FAMILLE, UNITE, DIRECT
-        @NotBlank public String typeMembre;
-        @NotBlank public String membreNom;
-        public String membreInitiales;
-
-        // RGPD
-        public boolean rgpdConsent;
-    }
 }

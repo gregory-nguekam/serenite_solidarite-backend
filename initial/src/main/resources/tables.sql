@@ -10,6 +10,7 @@ CREATE TABLE membre (
   id UUID NOT NULL,
   nom VARCHAR(50) NOT NULL,
   initiales VARCHAR(50) NOT NULL,
+  type VARCHAR(20),
   email VARCHAR(50) NOT NULL,
   telephone VARCHAR(20) NOT NULL,
   centre_interet VARCHAR(100),
@@ -33,6 +34,7 @@ CREATE TABLE adherent (
   password VARCHAR(200) NOT NULL,
   role VARCHAR(20) NOT NULL,
   is_active BOOLEAN NOT NULL,
+  is_validated BOOLEAN NOT NULL,
   CONSTRAINT adherent_PK PRIMARY KEY (id)
 );
 
@@ -47,7 +49,11 @@ CREATE TABLE adresse (
   code_postal INTEGER NOT NULL,
   ville VARCHAR(50) NOT NULL,
   complement VARCHAR(100),
-  CONSTRAINT adresse_PK PRIMARY KEY (id)
+  id_adherent UUID,
+  id_membre UUID,
+  CONSTRAINT adresse_PK PRIMARY KEY (id),
+  CONSTRAINT adresse_id_adherent_FK FOREIGN KEY (id_adherent) REFERENCES adherent (id),
+  CONSTRAINT adresse_id_membre_FK FOREIGN KEY (id_membre) REFERENCES membre (id)
 );
 
 
@@ -56,12 +62,28 @@ CREATE TABLE adresse (
 -- ----------------------------
 CREATE TABLE document (
   id UUID NOT NULL,
-  nom VARCHAR(50) NOT NULL,
+  nom VARCHAR(500) NOT NULL,
   type VARCHAR(50) NOT NULL,
   fichier BYTEA NOT NULL,
-  id_adherent UUID NOT NULL,
+  id_adherent UUID,
+  id_membre UUID,
   CONSTRAINT document_PK PRIMARY KEY (id),
-  CONSTRAINT document_id_adherent_FK FOREIGN KEY (id_adherent) REFERENCES adherent (id)
+  CONSTRAINT document_id_adherent_FK FOREIGN KEY (id_adherent) REFERENCES adherent (id),
+  CONSTRAINT document_id_membre_FK FOREIGN KEY (id_membre) REFERENCES membre (id)
+);
+
+
+-- ----------------------------
+-- Table: contribution
+-- ----------------------------
+CREATE TABLE contribution (
+  id UUID NOT NULL,
+  montant NUMERIC(10,2) NOT NULL,
+  date_contribution DATE NOT NULL,
+  description VARCHAR(200),
+  id_adherent UUID NOT NULL,
+  CONSTRAINT contribution_PK PRIMARY KEY (id),
+  CONSTRAINT contribution_id_adherent_FK FOREIGN KEY (id_adherent) REFERENCES adherent (id)
 );
 
 

@@ -24,6 +24,7 @@ public class AdherentUserDetailsService implements UserDetailsService {
         // Spring recommande le préfixe ROLE_
         var authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().name());
 
-        return new User(user.getEmail(), user.getPassword(), user.getIsActive(), true, true, true, List.of(authority));
+        boolean enabled = Boolean.TRUE.equals(user.getIsActive()) && Boolean.TRUE.equals(user.getIsValidated());
+        return new User(user.getEmail(), user.getPassword(), enabled, true, true, true, List.of(authority));
     }
 }

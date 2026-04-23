@@ -9,5 +9,4 @@ import java.util.UUID;
 
 public interface MembreRepository extends JpaRepository<MembreEntity, UUID> {
     Optional<MembreEntity> findByEmail(String email);
-
 }
